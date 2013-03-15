@@ -32,7 +32,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             style   = (window.getComputedStyle)? window.getComputedStyle(dom, null) : (dom.currentStyle || dom.style),
             product = {};
 
-		$.each(style, function(indexkey, value)
+    	$.each(style, function(indexkey, value)
         {
             var name = ( typeof indexkey == 'number' )? value : indexkey;
 
@@ -42,22 +42,22 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             }
         });
 
-		// remove any styles specified...
-		// be careful on blacklist - sometimes vendor-specific values aren't obvious but will be visible...  e.g., excepting 'color' will still let '-webkit-text-fill-color' through, which will in fact color the text
+    	// remove any styles specified...
+    	// be careful on blacklist - sometimes vendor-specific values aren't obvious but will be visible...  e.g., excepting 'color' will still let '-webkit-text-fill-color' through, which will in fact color the text
         $.each(except,function(index,value)
         {
             delete product[value];
-        });
+    	});
 
-		// one way out so we can process blacklist in one spot
-		return product;
-	};
+    	// one way out so we can process blacklist in one spot
+        return product;
+    };
 
     //-- updated for chaining
     //-- sugar - source is the selector, dom element or jQuery instance to copy from - except is optional
     $.fn.copyCSS = function(source,except)
     {
-        return this.css($.getStyles(source,except));
-	};
+    	return this.css($.getStyles(source,except));
+    };
 
 })(this,jQuery);
