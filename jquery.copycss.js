@@ -26,13 +26,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     //-- decision based on it being a shortcut to jQuery's ".css()" method
     $.getStyles = function(source, except)
     {
-        source = $(source);
-
-        var dom     = source.get(0),
+        var dom     = ($(source).get(0) || {}),
             style   = (window.getComputedStyle)? window.getComputedStyle(dom, null) : (dom.currentStyle || dom.style),
             product = {};
 
-    	$.each(style, function(indexkey, value)
+    	$.each((style || {}), function(indexkey, value)
         {
             var name = ( typeof indexkey == 'number' )? value : indexkey;
 
@@ -44,7 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     	// remove any styles specified...
     	// be careful on blacklist - sometimes vendor-specific values aren't obvious but will be visible...  e.g., excepting 'color' will still let '-webkit-text-fill-color' through, which will in fact color the text
-        $.each(except,function(index,value)
+        $.each((except || []),function(index,value)
         {
             delete product[value];
     	});
